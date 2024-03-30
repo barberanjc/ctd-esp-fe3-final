@@ -1,12 +1,16 @@
-import React from 'react'
+import React from "react";
+import { useNavigate } from "react-router-dom";
 
 const Footer = () => {
-  return (
-    <footer>
-        <p>Powered by</p>
-        <img src="./img/DH.png" alt='DH-logo' />
-    </footer>
-  )
-}
+const navigate = useNavigate();
+  
+return (
+  <footer>
+    <button onClick={() => navigate(-1)}>🔙</button>
+    <p>Powered by</p>
+    <img src="./images/DH.png" alt="DH-logo" className="logo" />
+  </footer>
+);
+};
 
-export default Footer
+export default Footer;

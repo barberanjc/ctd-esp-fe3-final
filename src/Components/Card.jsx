@@ -1,21 +1,31 @@
 import React from "react";
+import { useContextGlobal } from "./utils/global.context";
+import MyLink from "./MyLink";
 
+const Card = ({ item }) => {
+const { state, dispatch, favs } = useContextGlobal();
+console.log(favs);
 
-const Card = ({ name, username, id }) => {
+const addFav = () => {
+    const esFav = state.favs.some((dentist) => dentist.id === item.id);
 
-  const addFav = ()=>{
-    // Aqui iria la logica para agregar la Card en el localStorage
-  }
+    if (esFav) {
+      alert("Este doctor ya está en la lista de favoritos.");
+    } else {
+      dispatch({ type: "ADD_FAV", payload: item });
+      alert("El doctor se agregó a tu lista.");
+    }
+  };
 
-  return (
-    <div className="card">
-        {/* En cada card deberan mostrar en name - username y el id */}
-
-        {/* No debes olvidar que la Card a su vez servira como Link hacia la pagina de detalle */}
-
-        {/* Ademas deberan integrar la logica para guardar cada Card en el localStorage */}
-        <button onClick={addFav} className="favButton">Add fav</button>
-    </div>
+return (
+  <div className="card">
+    <img src="./public/images/doctor.jpg" alt="" />
+    <MyLink to={"/detalle/" + item.id} name={item.name} />
+    <h5>{item.username}</h5>
+    <button onClick={addFav} className="favButton">
+        agregar a favoritos
+    </button>
+  </div>
   );
 };
 
